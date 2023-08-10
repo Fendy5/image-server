@@ -9,7 +9,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh "docker buildx build --progress=plain -t common-server-${env.ItemName} ."
+        sh "docker buildx build --progress=plain -t common-services-${env.ItemName} ."
       }
     }
 
@@ -17,12 +17,12 @@ pipeline {
       steps {
         script{
           try {
-            sh "docker stop common-server-${env.ItemName}"
-            sh "docker rm common-server-${env.ItemName}"
+            sh "docker stop common-services-${env.ItemName}"
+            sh "docker rm common-services-${env.ItemName}"
           } catch(Exception e) {
             echo "命令执行出错: ${e.getMessage()}"
           }
-          sh "docker run -it -d --restart=always --name common-server-${env.ItemName} -v /www/wwwroot/${env.ItemName}.server/media:/app/media -v /www/wwwroot/${env.ItemName}.server/logs:/app/logs -p 7015:8000 common-server-${env.ItemName}"
+          sh "docker run -it -d --restart=always --name common-services-${env.ItemName} -v /www/wwwroot/${env.ItemName}.server/media:/app/media -v /www/wwwroot/${env.ItemName}.server/logs:/app/logs -p 7015:8000 common-services-${env.ItemName}"
           sh "docker image prune -f"
         }
       }
