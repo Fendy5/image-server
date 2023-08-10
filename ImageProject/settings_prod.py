@@ -4,6 +4,7 @@ import os
 import pymysql
 
 from ImageProject.settings import BASE_DIR
+from ImageProject.views import get_today
 
 print('prod~')
 DEBUG = False
@@ -33,7 +34,7 @@ LOGGING = {
         'file': {
             'level': 'WARNING',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': os.path.join(LOG_ROOT, 'tool_log'),
+            'filename': os.path.join(LOG_ROOT, get_today() + '.log'),
             'when': 'midnight',  # 每天生成一个新的日志文件
             'backupCount': 7,  # 保留最近7天的日志文件
             'formatter': 'standard',
