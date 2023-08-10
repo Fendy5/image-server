@@ -31,4 +31,4 @@ RUN mkdir "/app/logs"  \
 EXPOSE 8000
 
 ## 运行uWSGI服务器
-CMD ["uwsgi", "--http", "0.0.0.0:8000", "--module", "tool.wsgi"]
+CMD ["uwsgi", "--http", "0.0.0.0:8000", "--module", "ImageProject.wsgi"]

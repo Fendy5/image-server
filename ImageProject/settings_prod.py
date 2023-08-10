@@ -13,7 +13,8 @@ BASE_URL = 'https://image.fendy5.cn'
 pymysql.install_as_MySQLdb()
 
 ALLOWED_HOSTS = [
-    'image.fendy5.cn'
+    'image.fendy5.cn',
+    '172.17.0.1'
 ]
 
 LOG_ROOT = os.path.join(BASE_DIR, 'logs')  # 根据项目结构设置日志存储路径
