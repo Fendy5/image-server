@@ -1,0 +1,7 @@
+Dockerfile
+.dockerignore
+venv
+.idea
+/media
+/static
+db.sqlite3

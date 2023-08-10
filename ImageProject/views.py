@@ -1,0 +1,1 @@
+from datetime import datetimefrom django.http import JsonResponse# JSON响应def json_response(data=None, msg='', code=1):    rsp = {        'data': data,        'msg': msg,        'code': code    }    return JsonResponse(rsp)def get_today():    date_obj = datetime.now()  # 假设这是你的日期对象    return date_obj.strftime("%Y%m%d")  # 将日期对象转换为字符串
