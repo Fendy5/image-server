@@ -17,10 +17,11 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 
-from image.views import get_image, upload_image
+from image.views import get_image, upload_image, delete_image
 
 prefix = 'api/v1/'
 urlpatterns = [
-    path('s/<str:image_id>', get_image),
-    path(prefix + 'upload', upload_image)
+    path('t/<str:image_id>', get_image),
+    path(prefix + 'upload', upload_image),
+    path('delete/<str:image_id>', delete_image)
 ]

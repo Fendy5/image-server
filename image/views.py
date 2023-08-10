@@ -55,5 +55,5 @@ def get_image(request, image_id):
     return HttpResponse(image_data, content_type=image.content_type)
 
 
-def delete_image():
-    return json_response('delete_image')
+def delete_image(request, image_id):
+    return json_response(image_id)
