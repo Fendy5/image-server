@@ -31,7 +31,7 @@ def upload_image(request):
             else:
                 image = Image.open(BytesIO(i.read()))
                 save_image(image_format, image, image_path, quality)
-            image = ImageModel(image_id=image_id, origin_name=i.name, url=image_path, type=i.content_type)
+            image = ImageModel(image_id=image_id, origin_name=i.name, url=image_path, content_type=i.content_type)
             image.save()
     return json_response('', '上传成功')
 
