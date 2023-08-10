@@ -58,7 +58,7 @@ DATABASES = {
         'NAME': 'image',
         'USER': 'image',
         'PASSWORD': 'Meij4X27aC6PDtcd',
-        'HOST': '172.42.0.3',
+        'HOST': '172.42.0.1',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET time_zone='Asia/Shanghai';",  # 设置为 'Asia/Shanghai'
