@@ -22,7 +22,7 @@ pipeline {
           } catch(Exception e) {
             echo "命令执行出错: ${e.getMessage()}"
           }
-          sh "docker run -it -d --restart=always --name common-server-${env.ItemName} -v /www/wwwroot/${env.ItemName}.server/media:/app/media -v /www/wwwroot/${env.ItemName}.server/logs:/app/logs -p 7043:8000 common-server-${env.ItemName}"
+          sh "docker run -it -d --restart=always --name common-server-${env.ItemName} -v /www/wwwroot/${env.ItemName}.server/media:/app/media -v /www/wwwroot/${env.ItemName}.server/logs:/app/logs -p 7015:8000 common-server-${env.ItemName}"
           sh "docker image prune -f"
         }
       }
