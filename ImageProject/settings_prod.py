@@ -8,7 +8,6 @@ from ImageProject.views import get_today
 
 print('prod~')
 DEBUG = False
-BASE_URL = 'https://image.fendy5.cn'
 # 使用pymysql代替mysqlclient
 pymysql.install_as_MySQLdb()
 

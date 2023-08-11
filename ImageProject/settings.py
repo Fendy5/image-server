@@ -11,7 +11,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-q*9y@-sg5)9prx+7ooj9gw#s!79%e*e7mp69*@njx+3n0anw@m'
 
 print('os', os.environ.get('DJANGO_ENV'))
-if os.environ.get('DJANGO_ENV') == 'production':
+is_production = os.environ.get('DJANGO_ENV') == 'production'
+BASE_URL = 'https://image.fendy5.cn' if is_production else 'http://localhost:8000'
+if is_production:
     # 加载生产环境配置
     from .settings_prod import *
 else:

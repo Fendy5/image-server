@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.crypto import get_random_string
 from django.views.decorators.csrf import csrf_exempt
 
+from ImageProject.settings import BASE_URL
 from ImageProject.views import json_response, get_today
 from image.models import ImageModel
 
@@ -18,6 +19,7 @@ def upload_image(request):
         files = request.FILES.getlist('files[]')
         image_format, quality = request.POST.get('format'), request.POST.get('quality')
         path = 'media/upload/images/' + get_today()
+        image_urls = []  # 返回客户端的图片链接
         if not os.path.exists(path):
             os.makedirs(path)
         for i in files:
@@ -33,7 +35,8 @@ def upload_image(request):
                 save_image(image_format, image, image_path, quality)
             image = ImageModel(image_id=image_id, origin_name=i.name, url=image_path, content_type=i.content_type)
             image.save()
-    return json_response('', '上传成功')
+            image_urls.append(f'{BASE_URL}/t/{image_id}')
+        return json_response(image_urls, '上传成功')
 
 
 def save_image(image_format, image, path, quality):
