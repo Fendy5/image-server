@@ -17,7 +17,7 @@ from image.models import ImageModel
 def upload_image(request):
     if request.method == 'POST':
         files = request.FILES.getlist('files[]')
-        image_format, quality = request.POST.get('format'), request.POST.get('quality')
+        image_format, quality = request.POST.get('format', ''), request.POST.get('quality', 85)
         path = 'media/upload/images/' + get_today()
         image_urls = []  # 返回客户端的图片链接
         if not os.path.exists(path):
@@ -25,6 +25,8 @@ def upload_image(request):
         for i in files:
             suffix = i.name.split('.')[-1]
             image_id = get_random_string(32)
+            if not image_format:
+                image_format = suffix
             image_path = os.path.join(path, image_id + '.' + (suffix if suffix == 'svg' else image_format))
             if suffix == 'svg':
                 with open(image_path, 'wb+') as destination:
