@@ -23,11 +23,12 @@ def upload_image(request):
         if not os.path.exists(path):
             os.makedirs(path)
         for i in files:
-            suffix = i.name.split('.')[-1]
             image_id = get_random_string(32)
+            suffix = i.name.split('.')[-1]
             if not image_format:
                 image_format = suffix
             image_path = os.path.join(path, image_id + '.' + (suffix if suffix == 'svg' else image_format))
+            # svg格式的图片另外处理
             if suffix == 'svg':
                 with open(image_path, 'wb+') as destination:
                     for chunk in i.chunks():
@@ -41,9 +42,15 @@ def upload_image(request):
         return json_response(image_urls, '上传成功')
 
 
+# 根据图片的格式来保存图片
 def save_image(image_format, image, path, quality):
     match image_format:
         case 'jpg':
+            # 获取图像模式
+            mode = image.mode
+            # 判断图像是否为RGBA模式，如果是RGBA格式就转换为RGB格式
+            if mode == "RGBA":
+                image = image.convert("RGB")
             image.save(path, format='JPEG', quality=int(quality))
         case 'png':
             image.save(path, format='PNG', optimize=True)
