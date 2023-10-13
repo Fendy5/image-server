@@ -12,7 +12,7 @@ DEBUG = False
 pymysql.install_as_MySQLdb()
 
 ALLOWED_HOSTS = [
-    'image.fendy5.cn',
+    '.fendy5.cn',
     '.digitletter.com',
     '172.17.0.1'
 ]
