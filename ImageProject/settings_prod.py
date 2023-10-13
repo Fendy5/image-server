@@ -30,15 +30,19 @@ LOGGING = {
             'format': '[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s',
             'datefmt': '%Y-%m-%d %H:%M:%S',
         },
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
     },
     'handlers': {
         'file': {
             'level': 'WARNING',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': os.path.join(LOG_ROOT, get_today() + '.log'),
-            'when': 'midnight',  # 每天生成一个新的日志文件
+            'filename': os.path.join(LOG_ROOT, f'image.{get_today()}.log'),
+            'when': 'D',  # 每天生成一个新的日志文件
             'backupCount': 7,  # 保留最近7天的日志文件
-            'formatter': 'standard',
+            'formatter': 'verbose',
         },
     },
     'loggers': {
@@ -47,7 +51,8 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
-        'tool': {  # Django应用程序的名称
+        # Django应用程序的名称
+        'image': {
             'handlers': ['file'],
             'level': 'WARNING',
             'propagate': True,
